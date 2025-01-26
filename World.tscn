@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://clx8x7rm5o7v3"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
+
+[sub_resource type="Environment" id="Environment_heaam"]
+background_mode = 1
+background_color = Color(0.585638, 0.848637, 1, 1)
+ambient_light_source = 2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wyd4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5c1d"]
+backlight_enabled = true
+backlight = Color(1.81694e-06, 0.426875, 2.88785e-07, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_heaam")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_wyd4x")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground"]
+size = Vector3(25, 1, 25)
+material = SubResource("StandardMaterial3D_u5c1d")
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 0)
+fov = 62.247
+script = ExtResource("1_y6do3")
+target = NodePath("../CameraTarget")
+
+[node name="CameraTarget" type="Node3D" parent="."]
