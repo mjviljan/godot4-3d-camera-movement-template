@@ -31,7 +31,7 @@ size = Vector3(100, 1, 100)
 material = SubResource("ORMMaterial3D_74uph")
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 70)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 35)
 fov = 62.247
 script = ExtResource("1_y6do3")
 target = NodePath("../CameraTarget")
