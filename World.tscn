@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfbk11yyfp26g"]
+[gd_scene load_steps=8 format=3 uid="uid://bfbk11yyfp26g"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
+[ext_resource type="Script" path="res://player.gd" id="2_qvh51"]
 
 [sub_resource type="Environment" id="Environment_heaam"]
 background_mode = 1
@@ -33,7 +34,7 @@ size = Vector3(100, 1, 100)
 material = SubResource("ORMMaterial3D_74uph")
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 50, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 50, 35)
 fov = 62.247
 script = ExtResource("1_y6do3")
 target = NodePath("../CameraTarget")
@@ -86,6 +87,7 @@ material = SubResource("StandardMaterial3D_lmoaa")
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+script = ExtResource("2_qvh51")
 
 [node name="Body" type="CSGBox3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 0)
