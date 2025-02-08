@@ -14,3 +14,12 @@ You can control the camera using the keyboard:
 |  D  | Right                    |
 |  Q  | Rotate clockwise         |
 |  E  | Rotate counter-clockwise |
+
+There's also a player character that can be moved using the keyboard. It moves forward and backward related to the direction it's facing and doesn't strafe, i.e. it must be rotated to change its moving direction.
+
+| Key | Action        |
+|:---:|---------------|
+|  I  | Move forward  | 
+|  K  | Move backward | 
+|  J  | Turn left     | 
+|  L  | Turn right    |
