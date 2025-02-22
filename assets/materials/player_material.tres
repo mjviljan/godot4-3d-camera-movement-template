@@ -1,4 +1,7 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://cnxuyq3esjgky"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cnxuyq3esjgky"]
+
+[ext_resource type="Texture2D" uid="uid://rkjrvghdpxxt" path="res://assets/textures/fur-texture.png" id="1_sg4t5"]
 
 [resource]
-albedo_color = Color(0.431373, 0.180392, 0, 1)
+albedo_texture = ExtResource("1_sg4t5")
+uv1_scale = Vector3(8, 8, 8)
