@@ -15,6 +15,7 @@ func _process(delta):
 		distance_from_camera = distance_from_camera.rotated(Vector3.UP, -delta)
 	if Input.is_action_pressed("ui_camera_rotate_ccw"):
 		distance_from_camera = distance_from_camera.rotated(Vector3.UP, delta)
+
 	if Input.is_action_pressed("ui_camera_move_forward"):
 		movement += position.direction_to(target.position)
 	if Input.is_action_pressed("ui_camera_move_backward"):
@@ -28,7 +29,8 @@ func _process(delta):
 		movement = movement * delta * CAMERA_MOVEMENT_SPEED
 		movement.y = 0
 		# not sure if lerping adds any smoothness here, but using it still...
-		target.position = target.position.lerp(target.position + movement, 1 - delta)
+		var lerp_factor = min(.9 + delta, 1)
+		target.position = target.position.lerp(target.position + movement, lerp_factor)
 
 	position = target.position + distance_from_camera
 	look_at(target.position)

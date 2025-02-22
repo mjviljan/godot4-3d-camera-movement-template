@@ -18,6 +18,8 @@ func _process(delta):
 		#direction = direction.lerp(target_direction, .5 - delta)
 		#look_at(position + direction)
 
-	position = position.lerp(target_position, .75 - delta)
-	direction = direction.lerp(target_direction, .5 - delta)
+	var lerp_factor = min(.75 + delta, 1)
+	position = position.lerp(target_position, lerp_factor)
+	lerp_factor = min(.5 + delta, 1)
+	direction = direction.lerp(target_direction, lerp_factor)
 	look_at(position + direction)
