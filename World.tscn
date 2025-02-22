@@ -1,20 +1,50 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfbk11yyfp26g"]
+[gd_scene load_steps=18 format=3 uid="uid://bfbk11yyfp26g"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
+[ext_resource type="Material" uid="uid://hlxfcdqxrxoy" path="res://assets/materials/tower_material.tres" id="2_5wtb3"]
 [ext_resource type="Script" path="res://player.gd" id="2_qvh51"]
+[ext_resource type="BoxMesh" uid="uid://dyk3rwjiffx2" path="res://assets/meshes/tower_spike_mesh.tres" id="3_lxw2u"]
+[ext_resource type="Material" uid="uid://cnxuyq3esjgky" path="res://assets/materials/player_material.tres" id="5_in21g"]
+[ext_resource type="BoxMesh" uid="uid://ne6mslnt8264" path="res://assets/meshes/player_ear_mesh.tres" id="6_10fa0"]
+[ext_resource type="BoxMesh" uid="uid://c77ut2fx1anew" path="res://assets/meshes/player_leg_mesh.tres" id="7_uvsn1"]
 
 [sub_resource type="Environment" id="Environment_heaam"]
 background_mode = 1
 background_color = Color(0.585638, 0.848637, 1, 1)
 ambient_light_source = 2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wyd4x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8yqh"]
+albedo_color = Color(0, 1, 0.196078, 1)
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_74uph"]
+[sub_resource type="BoxMesh" id="BoxMesh_cmw4b"]
+material = SubResource("StandardMaterial3D_a8yqh")
+size = Vector3(100, 1, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmoaa"]
+[sub_resource type="Skin" id="Skin_ho81v"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cdjm"]
+[sub_resource type="BoxMesh" id="BoxMesh_onkxt"]
+material = ExtResource("2_5wtb3")
+size = Vector3(5, 13, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dha3x"]
+material = ExtResource("2_5wtb3")
+size = Vector3(6, 3, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tifw"]
+material = ExtResource("5_in21g")
+size = Vector3(1.7, 1.7, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojt1t"]
+material = ExtResource("5_in21g")
+size = Vector3(0.6, 2.5, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fbmgb"]
+material = ExtResource("5_in21g")
+size = Vector3(0.2, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_73ba0"]
+material = ExtResource("5_in21g")
+size = Vector3(0.3, 0.7, 0.3)
 
 [node name="World" type="Node3D"]
 
@@ -27,12 +57,11 @@ light_color = Color(1, 0.4, 0.2, 1)
 shadow_enabled = true
 sky_mode = 1
 
-[node name="Ground" type="StaticBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_wyd4x")
+[node name="Ground" type="Node3D" parent="."]
 
-[node name="GroundBox" type="CSGBox3D" parent="Ground"]
-size = Vector3(100, 1, 100)
-material = SubResource("ORMMaterial3D_74uph")
+[node name="GroundBox" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_cmw4b")
+skin = SubResource("Skin_ho81v")
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 35, 75, 35)
@@ -44,98 +73,86 @@ target = NodePath("../CameraTarget")
 
 [node name="Tower" type="Node3D" parent="."]
 
-[node name="TowerBody" type="CSGBox3D" parent="Tower"]
+[node name="TowerBody" type="MeshInstance3D" parent="Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
-size = Vector3(5, 13, 5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = SubResource("BoxMesh_onkxt")
 
-[node name="TowerTop" type="CSGBox3D" parent="Tower"]
+[node name="TowerTop" type="MeshInstance3D" parent="Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
-size = Vector3(6, 3, 6)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = SubResource("BoxMesh_dha3x")
 
-[node name="TowerCorner1" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerCorner1" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner2" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerCorner2" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner3" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerCorner3" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner4" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerCorner4" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide1" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerSide1" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide2" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerSide2" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 0)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide3" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerSide3" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.5)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide4" type="CSGBox3D" parent="Tower/TowerTop"]
+[node name="TowerSide4" type="MeshInstance3D" parent="Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 0)
-material = SubResource("StandardMaterial3D_lmoaa")
+mesh = ExtResource("3_lxw2u")
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
 script = ExtResource("2_qvh51")
 
-[node name="Body" type="CSGBox3D" parent="Player"]
+[node name="Body" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 0)
-size = Vector3(1.7, 1.7, 5)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = SubResource("BoxMesh_4tifw")
 
-[node name="Neck" type="CSGBox3D" parent="Player"]
+[node name="Neck" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9, -2.5)
-size = Vector3(0.6, 2.5, 0.6)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = SubResource("BoxMesh_ojt1t")
 
-[node name="Snout" type="CSGBox3D" parent="Player/Neck"]
+[node name="Snout" type="MeshInstance3D" parent="Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.6)
-size = Vector3(0.2, 0.4, 0.6)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = SubResource("BoxMesh_fbmgb")
 
-[node name="EarLeft" type="CSGBox3D" parent="Player/Neck"]
+[node name="EarLeft" type="MeshInstance3D" parent="Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1.4, -0.25)
-size = Vector3(0.2, 0.3, 0.1)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("6_10fa0")
 
-[node name="EarRight" type="CSGBox3D" parent="Player/Neck"]
+[node name="EarRight" type="MeshInstance3D" parent="Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.4, -0.25)
-size = Vector3(0.2, 0.3, 0.1)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("6_10fa0")
 
-[node name="LegFrontLeft" type="CSGBox3D" parent="Player"]
+[node name="LegFrontLeft" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1.5, -2.2)
-size = Vector3(0.4, 2, 0.5)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("7_uvsn1")
 
-[node name="LegFrontRight" type="CSGBox3D" parent="Player"]
+[node name="LegFrontRight" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.5, -2.2)
-size = Vector3(0.4, 2, 0.5)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("7_uvsn1")
 
-[node name="LegBackLeft" type="CSGBox3D" parent="Player"]
+[node name="LegBackLeft" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1.5, 2.2)
-size = Vector3(0.4, 2, 0.5)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("7_uvsn1")
 
-[node name="LegBackRight" type="CSGBox3D" parent="Player"]
+[node name="LegBackRight" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.5, 2.2)
-size = Vector3(0.4, 2, 0.5)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = ExtResource("7_uvsn1")
 
-[node name="Tail" type="CSGBox3D" parent="Player"]
+[node name="Tail" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 3.7, 2.6)
-size = Vector3(0.3, 0.7, 0.3)
-material = SubResource("StandardMaterial3D_8cdjm")
+mesh = SubResource("BoxMesh_73ba0")
