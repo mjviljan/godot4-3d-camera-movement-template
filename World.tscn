@@ -51,10 +51,10 @@ size = Vector3(0.3, 0.7, 0.3)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_heaam")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.881691, 0, 0.471828, -0.285653, 0.795907, 0.533792, -0.375531, -0.605419, 0.701744, 20, 20, 20)
-light_color = Color(1, 0.4, 0.2, 1)
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.881691, -3.15317e-07, 0.471827, -0.285653, 0.795907, 0.533792, -0.375531, -0.605419, 0.701744, 0, 25, 0)
 shadow_enabled = true
+shadow_opacity = 0.79
 sky_mode = 1
 
 [node name="Ground" type="Node3D" parent="."]
