@@ -1,5 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bfbk11yyfp26g"]
 
+[ext_resource type="Texture2D" uid="uid://bp5o720q6wtlo" path="res://assets/textures/grass_texture.png" id="1_0vsg7"]
 [ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
 [ext_resource type="Material" uid="uid://hlxfcdqxrxoy" path="res://assets/materials/tower_material.tres" id="2_5wtb3"]
 [ext_resource type="Script" path="res://player.gd" id="2_qvh51"]
@@ -13,14 +14,13 @@ background_mode = 1
 background_color = Color(0.585638, 0.848637, 1, 1)
 ambient_light_source = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8yqh"]
-albedo_color = Color(0, 1, 0.196078, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fx3b"]
+albedo_texture = ExtResource("1_0vsg7")
+uv1_scale = Vector3(8, 8, 8)
 
-[sub_resource type="BoxMesh" id="BoxMesh_cmw4b"]
-material = SubResource("StandardMaterial3D_a8yqh")
-size = Vector3(100, 1, 100)
-
-[sub_resource type="Skin" id="Skin_ho81v"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_e4eaw"]
+material = SubResource("StandardMaterial3D_3fx3b")
+size = Vector2(150, 150)
 
 [sub_resource type="BoxMesh" id="BoxMesh_onkxt"]
 material = ExtResource("2_5wtb3")
@@ -54,14 +54,11 @@ environment = SubResource("Environment_heaam")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.881691, -3.15317e-07, 0.471827, -0.285653, 0.795907, 0.533792, -0.375531, -0.605419, 0.701744, 0, 25, 0)
 shadow_enabled = true
-shadow_opacity = 0.79
 sky_mode = 1
 
-[node name="Ground" type="Node3D" parent="."]
-
-[node name="GroundBox" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_cmw4b")
-skin = SubResource("Skin_ho81v")
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 2.98023e-08, 0, 2.98023e-08, 1, 0, 2.98023e-08, 5.96046e-08, 1, 4.76837e-07, 0, -9.53674e-07)
+mesh = SubResource("PlaneMesh_e4eaw")
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 35, 75, 35)
@@ -74,11 +71,11 @@ target = NodePath("../CameraTarget")
 [node name="Tower" type="Node3D" parent="."]
 
 [node name="TowerBody" type="MeshInstance3D" parent="Tower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 mesh = SubResource("BoxMesh_onkxt")
 
 [node name="TowerTop" type="MeshInstance3D" parent="Tower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 mesh = SubResource("BoxMesh_dha3x")
 
 [node name="TowerCorner1" type="MeshInstance3D" parent="Tower/TowerTop"]
@@ -118,11 +115,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
 script = ExtResource("2_qvh51")
 
 [node name="Body" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
 mesh = SubResource("BoxMesh_4tifw")
 
 [node name="Neck" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9, -2.5)
 mesh = SubResource("BoxMesh_ojt1t")
 
 [node name="Snout" type="MeshInstance3D" parent="Player/Neck"]
@@ -138,21 +135,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.4, -0.25)
 mesh = ExtResource("6_10fa0")
 
 [node name="LegFrontLeft" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1.5, -2.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.5, -2.2)
 mesh = ExtResource("7_uvsn1")
 
 [node name="LegFrontRight" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.5, -2.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.5, -2.2)
 mesh = ExtResource("7_uvsn1")
 
 [node name="LegBackLeft" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1.5, 2.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.5, 2.2)
 mesh = ExtResource("7_uvsn1")
 
 [node name="LegBackRight" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.5, 2.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.5, 2.2)
 mesh = ExtResource("7_uvsn1")
 
 [node name="Tail" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 3.7, 2.6)
+transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 2.7, 2.6)
 mesh = SubResource("BoxMesh_73ba0")
