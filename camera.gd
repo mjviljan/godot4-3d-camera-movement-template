@@ -6,6 +6,15 @@ const CAMERA_MOVEMENT_SPEED = 40
 var distance_from_camera: Vector3
 
 func _ready():
+	var window = get_window()
+	var screen_rect = DisplayServer.screen_get_usable_rect(window.current_screen)
+	var window_side_length = min(screen_rect.size.x, screen_rect.size.y) * .95
+	# this is for a horizontal screen, with the window being wider than it is tall
+	DisplayServer.window_set_size(Vector2(1.5 * window_side_length, window_side_length))
+	var window_size = DisplayServer.window_get_size_with_decorations()
+	# center window
+	window.position = screen_rect.position + ((screen_rect.size - window_size) / 2)
+
 	distance_from_camera = position
 
 func _process(delta):
