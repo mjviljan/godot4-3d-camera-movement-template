@@ -1,6 +1,6 @@
 extends Node3D
 
-signal player_moving_to(position)
+signal moving_to(position)
 
 const STEP_LENGTH: float = 8
 var direction = Vector3.FORWARD
@@ -17,7 +17,7 @@ func _process(delta):
 			target_position -= target_direction * STEP_LENGTH
 
 		move_direction = Constants.Direction.NONE
-		player_moving_to.emit(target_position)
+		moving_to.emit(target_position)
 
 	if (turn_direction != Constants.Rotation.NONE):
 		target_direction = target_direction.rotated(Vector3.UP, PI / 2 * turn_direction)

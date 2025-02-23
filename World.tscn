@@ -70,6 +70,7 @@ script = ExtResource("1_y6do3")
 target = NodePath("../CameraTarget")
 
 [node name="CameraTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
 
 [node name="Tower" type="Node3D" parent="."]
 
@@ -161,3 +162,4 @@ mesh = SubResource("BoxMesh_73ba0")
 [connection signal="camera_rotate" from="." to="Camera" method="_on_world_camera_rotate"]
 [connection signal="player_move" from="." to="Player" method="_on_world_player_move"]
 [connection signal="player_rotate" from="." to="Player" method="_on_world_player_rotate"]
+[connection signal="moving_to" from="Player" to="Camera" method="_on_player_moving_to"]
