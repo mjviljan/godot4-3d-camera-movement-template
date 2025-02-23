@@ -1,9 +1,7 @@
 extends Node3D
 
-const CLOCKWISE = -1
-const COUNTER_CLOCKWISE = 1
-
 signal camera_rotate(direction)
+signal camera_move(direction)
 
 func _ready():
 	var window = get_window()
@@ -17,6 +15,15 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("ui_camera_rotate_cw"):
-		camera_rotate.emit(CLOCKWISE)
+		camera_rotate.emit(Constants.Rotation.CLOCKWISE)
 	if Input.is_action_pressed("ui_camera_rotate_ccw"):
-		camera_rotate.emit(COUNTER_CLOCKWISE)
+		camera_rotate.emit(Constants.Rotation.COUNTER_CLOCKWISE)
+
+	if Input.is_action_pressed("ui_camera_move_forward"):
+		camera_move.emit(Constants.Direction.FORWARD)
+	if Input.is_action_pressed("ui_camera_move_backward"):
+		camera_move.emit(Constants.Direction.BACKWARD)
+	if Input.is_action_pressed("ui_camera_move_left"):
+		camera_move.emit(Constants.Direction.LEFT)
+	if Input.is_action_pressed("ui_camera_move_right"):
+		camera_move.emit(Constants.Direction.RIGHT)

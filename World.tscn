@@ -157,4 +157,5 @@ mesh = ExtResource("7_uvsn1")
 transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 2.7, 2.6)
 mesh = SubResource("BoxMesh_73ba0")
 
+[connection signal="camera_move" from="." to="Camera" method="_on_world_camera_move"]
 [connection signal="camera_rotate" from="." to="Camera" method="_on_world_camera_rotate"]
