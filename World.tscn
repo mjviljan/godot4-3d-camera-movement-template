@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfbk11yyfp26g"]
+[gd_scene load_steps=19 format=3 uid="uid://bfbk11yyfp26g"]
 
 [ext_resource type="Texture2D" uid="uid://bp5o720q6wtlo" path="res://assets/textures/grass_texture.png" id="1_0vsg7"]
+[ext_resource type="Script" path="res://world.gd" id="1_pqh1d"]
 [ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
 [ext_resource type="Material" uid="uid://hlxfcdqxrxoy" path="res://assets/materials/tower_material.tres" id="2_5wtb3"]
 [ext_resource type="Script" path="res://player.gd" id="2_qvh51"]
@@ -47,6 +48,7 @@ material = ExtResource("5_in21g")
 size = Vector3(0.3, 0.7, 0.3)
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_pqh1d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_heaam")
@@ -54,6 +56,7 @@ environment = SubResource("Environment_heaam")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.881691, -3.15317e-07, 0.471827, -0.285653, 0.795907, 0.533792, -0.375531, -0.605419, 0.701744, 0, 25, 0)
 shadow_enabled = true
+directional_shadow_max_distance = 250.0
 sky_mode = 1
 
 [node name="Ground" type="MeshInstance3D" parent="."]
@@ -153,3 +156,5 @@ mesh = ExtResource("7_uvsn1")
 [node name="Tail" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 2.7, 2.6)
 mesh = SubResource("BoxMesh_73ba0")
+
+[connection signal="camera_rotate" from="." to="Camera" method="_on_world_camera_rotate"]
