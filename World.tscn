@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfbk11yyfp26g"]
+[gd_scene load_steps=22 format=3 uid="uid://bfbk11yyfp26g"]
 
 [ext_resource type="Texture2D" uid="uid://bp5o720q6wtlo" path="res://assets/textures/grass_texture.png" id="1_0vsg7"]
 [ext_resource type="Script" path="res://world.gd" id="1_pqh1d"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://cnxuyq3esjgky" path="res://assets/materials/player_material.tres" id="5_in21g"]
 [ext_resource type="BoxMesh" uid="uid://ne6mslnt8264" path="res://assets/meshes/player_ear_mesh.tres" id="6_10fa0"]
 [ext_resource type="BoxMesh" uid="uid://c77ut2fx1anew" path="res://assets/meshes/player_leg_mesh.tres" id="7_uvsn1"]
+[ext_resource type="StyleBox" uid="uid://x280h7146q5l" path="res://assets/ui-styles/instruction_panel.tres" id="11_xx1b2"]
 
 [sub_resource type="Environment" id="Environment_heaam"]
 background_mode = 1
@@ -51,119 +52,339 @@ size = Vector3(0.2, 0.4, 0.6)
 material = ExtResource("5_in21g")
 size = Vector3(0.3, 0.7, 0.3)
 
-[node name="World" type="Node3D"]
+[sub_resource type="LabelSettings" id="LabelSettings_8u0p5"]
+
+[node name="RootCanvas" type="CanvasLayer"]
+
+[node name="World" type="Node3D" parent="."]
 script = ExtResource("1_pqh1d")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_heaam")
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.881691, -3.15317e-07, 0.471827, -0.285653, 0.795907, 0.533792, -0.375531, -0.605419, 0.701744, 0, 25, 0)
+[node name="Sun" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.881691, -3.81008e-07, 0.471827, -0.285653, 0.795907, 0.533793, -0.375531, -0.605419, 0.701744, 0, 25, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 250.0
 sky_mode = 1
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="World"]
 transform = Transform3D(1, 2.98023e-08, 0, 2.98023e-08, 1, 0, 2.98023e-08, 5.96046e-08, 1, 4.76837e-07, 0, -9.53674e-07)
 mesh = SubResource("PlaneMesh_e4eaw")
+skeleton = NodePath("../..")
 
-[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Camera" type="Camera3D" parent="World" node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 35, 75, 35)
+current = true
 fov = 35.0
 script = ExtResource("1_y6do3")
 target = NodePath("../CameraTarget")
 
-[node name="CameraTarget" type="Node3D" parent="."]
+[node name="CameraTarget" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
 
-[node name="Tower" type="Node3D" parent="."]
+[node name="Tower" type="Node3D" parent="World"]
 
-[node name="TowerBody" type="MeshInstance3D" parent="Tower"]
+[node name="TowerBody" type="MeshInstance3D" parent="World/Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 mesh = SubResource("BoxMesh_onkxt")
 
-[node name="TowerTop" type="MeshInstance3D" parent="Tower"]
+[node name="TowerTop" type="MeshInstance3D" parent="World/Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 mesh = SubResource("BoxMesh_dha3x")
 
-[node name="TowerCorner1" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerCorner1" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner2" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerCorner2" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner3" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerCorner3" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerCorner4" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerCorner4" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide1" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerSide1" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide2" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerSide2" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 0)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide3" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerSide3" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.5)
 mesh = ExtResource("3_lxw2u")
 
-[node name="TowerSide4" type="MeshInstance3D" parent="Tower/TowerTop"]
+[node name="TowerSide4" type="MeshInstance3D" parent="World/Tower/TowerTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 0)
 mesh = ExtResource("3_lxw2u")
 
-[node name="Player" type="Node3D" parent="."]
+[node name="Player" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
 script = ExtResource("2_qvh51")
 
-[node name="Body" type="MeshInstance3D" parent="Player"]
+[node name="Body" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
 mesh = SubResource("BoxMesh_4tifw")
 
-[node name="Neck" type="MeshInstance3D" parent="Player"]
+[node name="Neck" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9, -2.5)
 mesh = SubResource("BoxMesh_ojt1t")
 
-[node name="Snout" type="MeshInstance3D" parent="Player/Neck"]
+[node name="Snout" type="MeshInstance3D" parent="World/Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.6)
 mesh = SubResource("BoxMesh_fbmgb")
 
-[node name="EarLeft" type="MeshInstance3D" parent="Player/Neck"]
+[node name="EarLeft" type="MeshInstance3D" parent="World/Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1.4, -0.25)
 mesh = ExtResource("6_10fa0")
 
-[node name="EarRight" type="MeshInstance3D" parent="Player/Neck"]
+[node name="EarRight" type="MeshInstance3D" parent="World/Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.4, -0.25)
 mesh = ExtResource("6_10fa0")
 
-[node name="LegFrontLeft" type="MeshInstance3D" parent="Player"]
+[node name="LegFrontLeft" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.5, -2.2)
 mesh = ExtResource("7_uvsn1")
 
-[node name="LegFrontRight" type="MeshInstance3D" parent="Player"]
+[node name="LegFrontRight" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.5, -2.2)
 mesh = ExtResource("7_uvsn1")
 
-[node name="LegBackLeft" type="MeshInstance3D" parent="Player"]
+[node name="LegBackLeft" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.5, 2.2)
 mesh = ExtResource("7_uvsn1")
 
-[node name="LegBackRight" type="MeshInstance3D" parent="Player"]
+[node name="LegBackRight" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.5, 2.2)
 mesh = ExtResource("7_uvsn1")
 
-[node name="Tail" type="MeshInstance3D" parent="Player"]
+[node name="Tail" type="MeshInstance3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 0.788, 0.615675, 0, -0.615675, 0.788, 0, 2.7, 2.6)
 mesh = SubResource("BoxMesh_73ba0")
 
-[connection signal="camera_move" from="." to="Camera" method="_on_world_camera_move"]
-[connection signal="camera_rotate" from="." to="Camera" method="_on_world_camera_rotate"]
-[connection signal="player_move" from="." to="Player" method="_on_world_player_move"]
-[connection signal="player_rotate" from="." to="Player" method="_on_world_player_rotate"]
-[connection signal="moving_to" from="Player" to="Camera" method="_on_player_moving_to"]
+[node name="Instructions" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Instructions"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 310.0
+offset_bottom = 210.0
+
+[node name="MoveCameraPanel" type="Panel" parent="Instructions/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 125.0
+offset_bottom = 109.0
+theme_override_styles/panel = ExtResource("11_xx1b2")
+
+[node name="MoveCameraLabel" type="Label" parent="Instructions/Panel/MoveCameraPanel"]
+layout_mode = 2
+offset_right = 105.0
+offset_bottom = 23.0
+text = "Move camera"
+
+[node name="LetterContainerA" type="PanelContainer" parent="Instructions/Panel/MoveCameraPanel"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 60.0
+offset_right = 30.0
+offset_bottom = 85.0
+
+[node name="LabelA" type="Label" parent="Instructions/Panel/MoveCameraPanel/LetterContainerA"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "A"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerW" type="PanelContainer" parent="Instructions/Panel/MoveCameraPanel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 55.0
+
+[node name="LabelW" type="Label" parent="Instructions/Panel/MoveCameraPanel/LetterContainerW"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "W"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerS" type="PanelContainer" parent="Instructions/Panel/MoveCameraPanel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 85.0
+
+[node name="LabelS" type="Label" parent="Instructions/Panel/MoveCameraPanel/LetterContainerS"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "S"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerD" type="PanelContainer" parent="Instructions/Panel/MoveCameraPanel"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 60.0
+offset_right = 90.0
+offset_bottom = 85.0
+
+[node name="LabelD" type="Label" parent="Instructions/Panel/MoveCameraPanel/LetterContainerD"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "D"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RotateCameraPanel" type="Panel" parent="Instructions/Panel"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 10.0
+offset_right = 281.0
+offset_bottom = 109.0
+theme_override_styles/panel = ExtResource("11_xx1b2")
+
+[node name="RotateCameraLabel" type="Label" parent="Instructions/Panel/RotateCameraPanel"]
+layout_mode = 2
+offset_right = 105.0
+offset_bottom = 23.0
+text = "Rotate camera"
+
+[node name="LetterContainerQ" type="PanelContainer" parent="Instructions/Panel/RotateCameraPanel"]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 30.0
+offset_right = 50.0
+offset_bottom = 55.0
+
+[node name="LabelQ" type="Label" parent="Instructions/Panel/RotateCameraPanel/LetterContainerQ"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Q"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerE" type="PanelContainer" parent="Instructions/Panel/RotateCameraPanel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 30.0
+offset_right = 85.0
+offset_bottom = 55.0
+
+[node name="LabelE" type="Label" parent="Instructions/Panel/RotateCameraPanel/LetterContainerE"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "E"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnPlayerPanel" type="Panel" parent="Instructions/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 120.0
+offset_right = 125.0
+offset_bottom = 219.0
+theme_override_styles/panel = ExtResource("11_xx1b2")
+
+[node name="TurnPlayerLabel" type="Label" parent="Instructions/Panel/TurnPlayerPanel"]
+layout_mode = 2
+offset_right = 105.0
+offset_bottom = 23.0
+text = "Turn player"
+
+[node name="LetterContainerJ" type="PanelContainer" parent="Instructions/Panel/TurnPlayerPanel"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 45.0
+offset_bottom = 55.0
+
+[node name="LabelJ" type="Label" parent="Instructions/Panel/TurnPlayerPanel/LetterContainerJ"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "J"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerL" type="PanelContainer" parent="Instructions/Panel/TurnPlayerPanel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 55.0
+
+[node name="LabelL" type="Label" parent="Instructions/Panel/TurnPlayerPanel/LetterContainerL"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "L"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovePlayerPanel" type="Panel" parent="Instructions/Panel"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 90.0
+offset_right = 281.0
+offset_bottom = 189.0
+theme_override_styles/panel = ExtResource("11_xx1b2")
+
+[node name="MovePlayerLabel" type="Label" parent="Instructions/Panel/MovePlayerPanel"]
+layout_mode = 2
+offset_right = 105.0
+offset_bottom = 23.0
+text = "Move player"
+
+[node name="LetterContainerI" type="PanelContainer" parent="Instructions/Panel/MovePlayerPanel"]
+layout_mode = 2
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 65.0
+offset_bottom = 55.0
+
+[node name="LabelI" type="Label" parent="Instructions/Panel/MovePlayerPanel/LetterContainerI"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "I"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterContainerK" type="PanelContainer" parent="Instructions/Panel/MovePlayerPanel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 60.0
+offset_right = 65.0
+offset_bottom = 85.0
+
+[node name="LabelK" type="Label" parent="Instructions/Panel/MovePlayerPanel/LetterContainerK"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "K"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="camera_move" from="World" to="World/Camera" method="_on_world_camera_move"]
+[connection signal="camera_rotate" from="World" to="World/Camera" method="_on_world_camera_rotate"]
+[connection signal="player_move" from="World" to="World/Player" method="_on_world_player_move"]
+[connection signal="player_rotate" from="World" to="World/Player" method="_on_world_player_rotate"]
+[connection signal="moving_to" from="World/Player" to="World/Camera" method="_on_player_moving_to"]
