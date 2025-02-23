@@ -1,7 +1,10 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://hlxfcdqxrxoy"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://hlxfcdqxrxoy"]
 
 [ext_resource type="Texture2D" uid="uid://bwd2rtuvoqekf" path="res://assets/textures/tile-texture.png" id="1_asq4e"]
+[ext_resource type="Texture2D" uid="uid://dawif5n00qb6p" path="res://assets/textures/tile-texture-normal.png" id="2_o5vxi"]
 
 [resource]
 albedo_texture = ExtResource("1_asq4e")
+normal_enabled = true
+normal_texture = ExtResource("2_o5vxi")
 uv1_scale = Vector3(16, 16, 16)

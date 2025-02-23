@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp5o720q6wtlo"
-path.s3tc="res://.godot/imported/grass_texture.png-8c45528b6b840b968daa56feb5ad7e43.s3tc.ctex"
+uid="uid://b0o7p7ogk6usr"
+path.s3tc="res://.godot/imported/grass_texture_normal.png-6f746009bf7d5ed3c2197f1f8214948a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/grass_texture.png"
-dest_files=["res://.godot/imported/grass_texture.png-8c45528b6b840b968daa56feb5ad7e43.s3tc.ctex"]
+source_file="res://assets/textures/grass_texture_normal.png"
+dest_files=["res://.godot/imported/grass_texture_normal.png-6f746009bf7d5ed3c2197f1f8214948a.s3tc.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://assets/textures/grass_texture.png"
+roughness/src_normal="res://assets/textures/grass_texture_normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
