@@ -4,6 +4,7 @@ signal camera_rotate(direction)
 signal camera_move(direction)
 
 signal player_rotate(direction)
+signal player_move(direction)
 
 func _ready():
 	var window = get_window()
@@ -34,3 +35,8 @@ func _process(delta):
 		player_rotate.emit(Constants.Rotation.CLOCKWISE)
 	if Input.is_action_just_pressed("ui_player_turn_left"):
 		player_rotate.emit(Constants.Rotation.COUNTER_CLOCKWISE)
+
+	if Input.is_action_just_pressed("ui_player_move_forward"):
+		player_move.emit(Constants.Direction.FORWARD)
+	if Input.is_action_just_pressed("ui_player_move_backward"):
+		player_move.emit(Constants.Direction.BACKWARD)

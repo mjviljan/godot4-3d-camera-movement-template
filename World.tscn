@@ -159,4 +159,5 @@ mesh = SubResource("BoxMesh_73ba0")
 
 [connection signal="camera_move" from="." to="Camera" method="_on_world_camera_move"]
 [connection signal="camera_rotate" from="." to="Camera" method="_on_world_camera_rotate"]
+[connection signal="player_move" from="." to="Player" method="_on_world_player_move"]
 [connection signal="player_rotate" from="." to="Player" method="_on_world_player_rotate"]
