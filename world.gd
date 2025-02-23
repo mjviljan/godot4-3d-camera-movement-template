@@ -3,6 +3,8 @@ extends Node3D
 signal camera_rotate(direction)
 signal camera_move(direction)
 
+signal player_rotate(direction)
+
 func _ready():
 	var window = get_window()
 	var screen_rect = DisplayServer.screen_get_usable_rect(window.current_screen)
@@ -27,3 +29,8 @@ func _process(delta):
 		camera_move.emit(Constants.Direction.LEFT)
 	if Input.is_action_pressed("ui_camera_move_right"):
 		camera_move.emit(Constants.Direction.RIGHT)
+
+	if Input.is_action_just_pressed("ui_player_turn_right"):
+		player_rotate.emit(Constants.Rotation.CLOCKWISE)
+	if Input.is_action_just_pressed("ui_player_turn_left"):
+		player_rotate.emit(Constants.Rotation.COUNTER_CLOCKWISE)
