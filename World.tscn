@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfbk11yyfp26g"]
+[gd_scene load_steps=20 format=3 uid="uid://bfbk11yyfp26g"]
 
 [ext_resource type="Texture2D" uid="uid://bp5o720q6wtlo" path="res://assets/textures/grass_texture.png" id="1_0vsg7"]
 [ext_resource type="Script" path="res://world.gd" id="1_pqh1d"]
 [ext_resource type="Script" path="res://camera.gd" id="1_y6do3"]
 [ext_resource type="Material" uid="uid://hlxfcdqxrxoy" path="res://assets/materials/tower_material.tres" id="2_5wtb3"]
 [ext_resource type="Script" path="res://player.gd" id="2_qvh51"]
+[ext_resource type="Texture2D" uid="uid://b0o7p7ogk6usr" path="res://assets/textures/grass_texture_normal.png" id="3_3ocgp"]
 [ext_resource type="BoxMesh" uid="uid://dyk3rwjiffx2" path="res://assets/meshes/tower_spike_mesh.tres" id="3_lxw2u"]
 [ext_resource type="Material" uid="uid://cnxuyq3esjgky" path="res://assets/materials/player_material.tres" id="5_in21g"]
 [ext_resource type="BoxMesh" uid="uid://ne6mslnt8264" path="res://assets/meshes/player_ear_mesh.tres" id="6_10fa0"]
@@ -17,6 +18,9 @@ ambient_light_source = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fx3b"]
 albedo_texture = ExtResource("1_0vsg7")
+normal_enabled = true
+normal_scale = -1.75
+normal_texture = ExtResource("3_3ocgp")
 uv1_scale = Vector3(8, 8, 8)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e4eaw"]
