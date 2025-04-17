@@ -13,7 +13,7 @@ config_version=5
 config/name="3D Camera Movement"
 config/description="A template for a 3D project with keyboard-controlled camera and player movement"
 run/main_scene="res://World.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
