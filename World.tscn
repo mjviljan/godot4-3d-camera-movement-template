@@ -385,6 +385,7 @@ vertical_alignment = 1
 
 [connection signal="camera_move" from="World" to="World/Camera" method="_on_world_camera_move"]
 [connection signal="camera_rotate" from="World" to="World/Camera" method="_on_world_camera_rotate"]
+[connection signal="camera_zoom" from="World" to="World/Camera" method="_on_world_camera_zoom"]
 [connection signal="player_move" from="World" to="World/Player" method="_on_world_player_move"]
 [connection signal="player_rotate" from="World" to="World/Player" method="_on_world_player_rotate"]
 [connection signal="moving_to" from="World/Player" to="World/Camera" method="_on_player_moving_to"]
