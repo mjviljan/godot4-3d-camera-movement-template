@@ -2,6 +2,7 @@ extends Node3D
 
 signal camera_rotate(direction)
 signal camera_move(direction)
+signal camera_zoom(direction)
 
 signal player_rotate(direction)
 signal player_move(direction)
@@ -40,3 +41,8 @@ func _process(delta):
 		player_move.emit(Constants.Direction.FORWARD)
 	if Input.is_action_just_pressed("ui_player_move_backward"):
 		player_move.emit(Constants.Direction.BACKWARD)
+
+	if Input.is_action_just_pressed("ui_camera_zoom_in"):
+		camera_zoom.emit(Constants.Zoom.IN)
+	if Input.is_action_just_pressed("ui_camera_zoom_out"):
+		camera_zoom.emit(Constants.Zoom.OUT)

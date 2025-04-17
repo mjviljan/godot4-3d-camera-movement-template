@@ -11,3 +11,8 @@ enum Rotation {
 	CLOCKWISE = -1,
 	COUNTER_CLOCKWISE = 1
 }
+
+enum Zoom {
+	IN = 1,
+	OUT = 2
+}

@@ -175,7 +175,7 @@ mesh = SubResource("BoxMesh_73ba0")
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 310.0
-offset_bottom = 210.0
+offset_bottom = 294.0
 
 [node name="MoveCameraPanel" type="Panel" parent="Instructions/Panel"]
 layout_mode = 0
@@ -383,8 +383,36 @@ label_settings = SubResource("LabelSettings_8u0p5")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ZoomCameraPanel" type="Panel" parent="Instructions/Panel"]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 278.0
+offset_bottom = 263.0
+theme_override_styles/panel = ExtResource("11_xx1b2")
+
+[node name="ZoomCameraLabel" type="Label" parent="Instructions/Panel/ZoomCameraPanel"]
+layout_mode = 2
+offset_right = 105.0
+offset_bottom = 23.0
+text = "Zoom camera"
+
+[node name="LetterContainerJ" type="PanelContainer" parent="Instructions/Panel/ZoomCameraPanel"]
+layout_mode = 2
+offset_top = 30.0
+offset_right = 121.0
+offset_bottom = 55.0
+
+[node name="LabelCameraWheel" type="Label" parent="Instructions/Panel/ZoomCameraPanel/LetterContainerJ"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "camera wheel"
+label_settings = SubResource("LabelSettings_8u0p5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="camera_move" from="World" to="World/Camera" method="_on_world_camera_move"]
 [connection signal="camera_rotate" from="World" to="World/Camera" method="_on_world_camera_rotate"]
+[connection signal="camera_zoom" from="World" to="World/Camera" method="_on_world_camera_zoom"]
 [connection signal="player_move" from="World" to="World/Player" method="_on_world_player_move"]
 [connection signal="player_rotate" from="World" to="World/Player" method="_on_world_player_rotate"]
 [connection signal="moving_to" from="World/Player" to="World/Camera" method="_on_player_moving_to"]
